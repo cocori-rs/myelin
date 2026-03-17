@@ -1,0 +1,50 @@
+[package]
+name         = "myelin"
+version      = "0.1.0"
+edition      = "2021"
+rust-version = "1.75"
+description  = "Type-safe, async-first middleware layer for tonic gRPC services"
+license      = "MIT"
+repository   = "https://github.com/ryosuke/myelin"
+keywords     = ["grpc", "tonic", "middleware", "tower", "async"]
+categories   = ["network-programming", "asynchronous"]
+
+[dependencies]
+# gRPC
+tonic = { version = "0.14", default-features = false }
+
+# Tower middleware foundation
+tower         = { version = "0.5", features = ["util"] }
+tower-layer   = "0.3"
+tower-service = "0.3"
+
+# HTTP / async primitives
+http       = "1.0"
+http-body  = "1.0"
+bytes      = "1.0"
+tokio      = { version = "1", features = ["sync"] }
+
+# Cancellation
+tokio-util = { version = "0.7", features = ["rt"] }
+
+# async trait
+async-trait = "0.1"
+
+# Error handling
+thiserror = "2"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full", "test-util"] }
+
+[features]
+default = []
+tracing = ["dep:tracing"]
+metrics = ["dep:metrics"]
+
+[dependencies.tracing]
+version  = "0.1"
+optional = true
+
+[dependencies.metrics]
+version  = "0.23"
+optional = true
